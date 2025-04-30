@@ -8,6 +8,11 @@ contract YieldFarm {
 
     uint256 public rewardRate = 10; // 10% yield
 
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can call this");
+        _;
+    }
+
     constructor() {
         owner = msg.sender;
     }
@@ -29,5 +34,8 @@ contract YieldFarm {
         rewards[msg.sender] = 0;
         payable(msg.sender).transfer(balance + reward);
     }
-}
+
+    // View staked balance and pending rewards
+    function checkStake() external view returns (uint256 staked, uint256
+
 
